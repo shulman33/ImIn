@@ -14,7 +14,7 @@ let insideTrack = 'https://insidetrack.oci.yu.edu/';
     page.waitForNavigation(),
     page.click('[type="submit"]')
   ]);
-  
+
   await page.click('#layout_34');
   await page.goto('https://insidetrack.oci.yu.edu/web/home-community/undergraduate');
   await page.goto('https://banner.oci.yu.edu/ssomanager/c/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_MainMnu');
