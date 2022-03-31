@@ -5,11 +5,38 @@ let insideTrack = 'https://insidetrack.oci.yu.edu/';
 const username = process.argv[2];
 const password = process.argv[3];
 const crn1 = process.argv[4];
+let time = process.argv[5];
+let date = process.argv[6];
 
-//schedule.scheduleJob("* 10 15 31 3*",register());
+let newTime = "1 ";
+let newDate = "";
 
+if (time[3] == '0'){
+  newTime += time[4] + " ";
+}else{
+  newTime += time[3] + time[4] + " ";
+}
+if (time[0] != '0'){
+  newTime += time[0] + time[1] + " ";
+}else{
+  newTime += time[1] + " ";
+}
 
-  schedule.scheduleJob("1 13 16 31 3 *", async() => {
+if (date[3] == '0'){
+  newDate += date[4] + " ";
+}else{
+  newDate += date[3] + date[4] + " ";
+}
+if (date[0] != '0'){
+  newDate += date[0] + date[1] + " *";
+}else{
+  newDate += date[1] + " *";
+}
+
+let newDateAndTime = newTime + newDate;
+console.log(newDateAndTime);
+//"1 30 16 31 3 *"
+  schedule.scheduleJob(newDateAndTime, async() => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setViewport({ width: 1366, height: 768});
