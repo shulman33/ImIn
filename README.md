@@ -29,6 +29,9 @@ It should look something like this
 
 ## Step 𝟝: Checking Results 
 Go into the src folder and you will see registration-status.png which is a screenshot of the classes you were just registered for.
+
+<img width="595" alt="Screen Shot 2022-04-01 at 12 04 24 AM" src="https://user-images.githubusercontent.com/62624776/161193016-954f8b57-1a93-4bbe-8d2b-de881b526fdf.png">
+
 ## Miscellaneous Points
  - Do not close the terminal until you have gotten your registration results
  - You can put in as many as 10 CRNs
