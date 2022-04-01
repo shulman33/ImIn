@@ -4,9 +4,19 @@ const schedule = require('node-schedule');
 let insideTrack = 'https://insidetrack.oci.yu.edu/';
 const username = process.argv[2];
 const password = process.argv[3];
-const crn1 = process.argv[4];
-let time = process.argv[5];
-let date = process.argv[6];
+let time = process.argv[4];
+let date = process.argv[5];
+const crn1 = process.argv[6];
+const crn2 = process.argv[7];
+const crn3 = process.argv[8];
+const crn4 = process.argv[9];
+const crn5 = process.argv[10];
+const crn6 = process.argv[11];
+const crn7 = process.argv[12];
+const crn8 = process.argv[13];
+const crn9 = process.argv[14];
+const crn10 = process.argv[15];
+
 
 let newTime = "1 ";
 let newDate = "";
@@ -34,7 +44,7 @@ if (date[0] != '0'){
 }
 
 let newDateAndTime = newTime + newDate;
-console.log(newDateAndTime);
+//console.log(newDateAndTime);
 //"1 30 16 31 3 *"
   schedule.scheduleJob(newDateAndTime, async() => {
     const browser = await puppeteer.launch();
@@ -67,8 +77,23 @@ console.log(newDateAndTime);
     ]);
 
     await page.type('#crn_id1', crn1);
-    await page.keyboard.press('Enter');
+
+    try {
+      await page.type('#crn_id2', crn2);
+      await page.type('#crn_id3', crn3);
+      await page.type('#crn_id4', crn4);
+      await page.type('#crn_id5', crn5);
+      await page.type('#crn_id6', crn6);
+      await page.type('#crn_id7', crn7);
+      await page.type('#crn_id8', crn8);
+      await page.type('#crn_id9', crn9);
+      await page.type('#crn_id10', crn10);
+    } catch (error) {
+      await page.keyboard.press('Enter');
+    }
+    
     await page.waitForNavigation();
     await page.screenshot({path: './registration-status.png'});
     await browser.close();
+    
   })
