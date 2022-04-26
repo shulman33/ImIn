@@ -7,13 +7,11 @@ Clone this repository to your computer or download the zip by clicking the green
 
 Download [Node.js](https://nodejs.org/en/download/) to your computer.
 ## Step 🥉: Project Configuration
-Using the terminal or command line navigate into registration-bot directory then into src and enter the following command into the terminal 
-
-    npm install
-This process could take a few minutes. When this finishes downloading enter the following commands into the terminal
+Using the terminal or command line navigate into registration-bot directory then into src and enter the following commands into the terminal 
     
     npm i puppeteer
-    
+ 
+
     npm install node-schedule --save
 ## Step ∜: Running the Bot
 Navigate to the src directory and enter the following into the terminal
