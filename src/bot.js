@@ -68,7 +68,7 @@ let newDateAndTime = newTime + newDate;
     await page.goto('https://banner.oci.yu.edu/ssb/bwskfreg.P_AltPin');
     await page.click('#term_id');
     
-    await page.select("select#term_id","202206");
+    await page.select("select#term_id","202209");
     await page.click('#term_id');
 
     const  [aresponse] = await Promise.all([
