@@ -21,23 +21,23 @@ const crn10 = process.argv[15];
 let newTime = "1 ";
 let newDate = "";
 
-if (time[3] == '0'){
+if (time[3] === '0'){
   newTime += time[4] + " ";
 }else{
   newTime += time[3] + time[4] + " ";
 }
-if (time[0] != '0'){
+if (time[0] !== '0'){
   newTime += time[0] + time[1] + " ";
 }else{
   newTime += time[1] + " ";
 }
 
-if (date[3] == '0'){
+if (date[3] === '0'){
   newDate += date[4] + " ";
 }else{
   newDate += date[3] + date[4] + " ";
 }
-if (date[0] != '0'){
+if (date[0] !== '0'){
   newDate += date[0] + date[1] + " *";
 }else{
   newDate += date[1] + " *";
@@ -48,6 +48,7 @@ let newDateAndTime = newTime + newDate;
   (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
+    await page.setDefaultNavigationTimeout(0);
     await page.setViewport({ width: 1366, height: 768});
     await page.goto(insideTrack);
     await page.type('#username', username);
@@ -66,7 +67,7 @@ let newDateAndTime = newTime + newDate;
     await page.goto('https://banner.oci.yu.edu/ssb/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu');
 
     schedule.scheduleJob(newDateAndTime, async() =>{
-      console.time("timer");
+      console.time("You registered in");
 
       await page.goto('https://banner.oci.yu.edu/ssb/bwskfreg.P_AltPin');
       await page.click('#term_id');
@@ -94,7 +95,7 @@ let newDateAndTime = newTime + newDate;
       } catch (error) {
         await page.keyboard.press('Enter');
       }
-      console.timeEnd("timer");
+      console.timeEnd("You registered in");
       await page.waitForNavigation();
       await page.screenshot({path: './registration-status.png'});
       await browser.close();
