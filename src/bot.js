@@ -74,10 +74,11 @@ console.log('start browser at ' + browserStartDateAndTime);
   (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
-    await page.setDefaultNavigationTimeout(0);
-    await page.setViewport({ width: 1366, height: 768});
 
     schedule.scheduleJob(browserStartDateAndTime, async() => {
+
+      await page.setDefaultNavigationTimeout(0);
+      await page.setViewport({ width: 1366, height: 768});
       await page.goto(insideTrack);
       await page.type('#username', username);
       await page.type('#password', password);
