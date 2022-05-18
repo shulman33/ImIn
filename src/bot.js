@@ -45,6 +45,26 @@ if (date[0] !== '0'){
 
 let newDateAndTime = newTime + newDate;
 
+const intArray = []
+for (let i = 0; i < time.length; i++){
+      if (!isNaN(time.charAt(i))){
+        intArray[i] = parseInt(time.charAt(i));
+      }
+}
+
+if (intArray[4] === 0){
+  intArray[3] -= 1;
+  intArray[4] = 9;
+}else {
+  intArray[4] -= 1;
+}
+
+let newestTime = intArray[3].toString() + intArray[4].toString() + " " + intArray[0].toString() + intArray[1].toString() + " " + "1 ";
+let startBrowser = newestTime + newDate;
+console.log('old time ' + newDateAndTime);
+console.log('newest time ' + newestTime);
+console.log('start browser at ' + startBrowser);
+
   (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
