@@ -45,9 +45,6 @@ if (date[0] != '0'){
 
 let newDateAndTime = newTime + newDate;
 
-
-//console.log(newDateAndTime);
-//"1 30 16 31 3 *"
   (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
