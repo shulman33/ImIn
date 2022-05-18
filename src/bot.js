@@ -47,7 +47,8 @@ let newDateAndTime = newTime + newDate;
 //console.log(newDateAndTime);
 //"1 30 16 31 3 *"
   schedule.scheduleJob(newDateAndTime, async() => {
-    const browser = await puppeteer.launch();
+    console.time("timer");
+    const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.setViewport({ width: 1366, height: 768});
     await page.goto(insideTrack);
@@ -91,7 +92,7 @@ let newDateAndTime = newTime + newDate;
     } catch (error) {
       await page.keyboard.press('Enter');
     }
-    
+    console.timeEnd("timer");
     await page.waitForNavigation();
     await page.screenshot({path: './registration-status.png'});
     await browser.close();
