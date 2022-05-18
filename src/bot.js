@@ -45,46 +45,51 @@ if (date[0] !== '0'){
 
 let newDateAndTime = newTime + newDate;
 
-const intArray = []
+const intTimeArray = []
+
 for (let i = 0; i < time.length; i++){
       if (!isNaN(time.charAt(i))){
-        intArray[i] = parseInt(time.charAt(i));
+        intTimeArray[i] = parseInt(time.charAt(i));
       }
 }
 
-if (intArray[4] === 0){
-  intArray[3] -= 1;
-  intArray[4] = 9;
+if (intTimeArray[4] === 0){
+  intTimeArray[3] -= 1;
+  intTimeArray[4] = 9;
 }else {
-  intArray[4] -= 1;
+  intTimeArray[4] -= 1;
 }
 
-let newestTime = intArray[3].toString() + intArray[4].toString() + " " + intArray[0].toString() + intArray[1].toString() + " " + "1 ";
-let startBrowser = newestTime + newDate;
+let browserStartTime = intTimeArray[3].toString() + intTimeArray[4].toString() + " " + intTimeArray[0].toString() + intTimeArray[1].toString() + " ";
+let browserStartDateAndTime = browserStartTime + newDate;
+
 console.log('old time ' + newDateAndTime);
-console.log('newest time ' + newestTime);
-console.log('start browser at ' + startBrowser);
+console.log('newest time ' + browserStartTime);
+console.log('start browser at ' + browserStartDateAndTime);
 
   (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     await page.setDefaultNavigationTimeout(0);
     await page.setViewport({ width: 1366, height: 768});
-    await page.goto(insideTrack);
-    await page.type('#username', username);
-    await page.type('#password', password);
 
-    const  [response] = await Promise.all([
-      page.waitForNavigation(),
-      page.click('[type="submit"]')
-    ]);
+    schedule.scheduleJob(browserStartDateAndTime, async() => {
+      await page.goto(insideTrack);
+      await page.type('#username', username);
+      await page.type('#password', password);
 
-    await page.click('#layout_34');
-    await page.goto('https://insidetrack.oci.yu.edu/web/home-community/undergraduate');
-    await page.goto('https://banner.oci.yu.edu/ssomanager/c/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_MainMnu');
-    await page.click('a.submenulinktext2 ');
-    await page.goto('https://banner.oci.yu.edu/ssb/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu');
-    await page.goto('https://banner.oci.yu.edu/ssb/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu');
+      const  [response] = await Promise.all([
+        page.waitForNavigation(),
+        page.click('[type="submit"]')
+      ]);
+
+      await page.click('#layout_34');
+      await page.goto('https://insidetrack.oci.yu.edu/web/home-community/undergraduate');
+      await page.goto('https://banner.oci.yu.edu/ssomanager/c/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_MainMnu');
+      await page.click('a.submenulinktext2 ');
+      await page.goto('https://banner.oci.yu.edu/ssb/twbkwbis.P_GenMenu?name=bmenu.P_StuMainMnu');
+      await page.goto('https://banner.oci.yu.edu/ssb/twbkwbis.P_GenMenu?name=bmenu.P_RegMnu');
+    })
 
     schedule.scheduleJob(newDateAndTime, async() =>{
       console.time("You registered in");
