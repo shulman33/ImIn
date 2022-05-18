@@ -53,7 +53,11 @@ for (let i = 0; i < time.length; i++){
       }
 }
 
-if (intTimeArray[4] === 0){
+if (intTimeArray[3] === 0 && intTimeArray[4] === 0){
+  intTimeArray[1] -= 1;
+  intTimeArray[3] = 5;
+  intTimeArray[4] = 9;
+}else if (intTimeArray[4] === 0){
   intTimeArray[3] -= 1;
   intTimeArray[4] = 9;
 }else {
